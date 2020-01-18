@@ -11,6 +11,7 @@ fi
 ./allbuild.sh > /dev/null
 
 WRONGS=""
+RIGHTS=""
 
 for Q in $QUESTIONS ; do
   EXEC="$Q/build/$Q"
@@ -26,10 +27,14 @@ for Q in $QUESTIONS ; do
     echo
     echo "$OUTPUT"
     echo
+  else
+    RIGHTS="$Q $RIGHTS"
   fi
 done
 
 if [ -n "$WRONGS" ] ; then
   echo "wrong: $WRONGS" >&2
   exit 1
+else
+  echo "gravy: $RIGHTS"
 fi
