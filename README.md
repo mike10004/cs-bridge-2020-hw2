@@ -1,4 +1,4 @@
-# Week 1 Homework Assignment
+# Week 2 Homework Assignment
 
 This is some of my homework.
 
