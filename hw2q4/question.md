@@ -1,7 +1,7 @@
 # Question 4:
 
 Write a program that reads from the user two positive integers, and prints the 
-result of when we add, subtract multiply, divide, div and mod them.
+result of when we add, subtract, multiply, divide, div and mod them.
 
 Your program should interact with the user exactly as it shows in the 
 following example:
