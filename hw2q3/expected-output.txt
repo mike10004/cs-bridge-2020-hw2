@@ -1,0 +1,3 @@
+Please enter the number of days John has worked: Please enter the number of hours John has worked: Please enter the number of minutes John has worked: 
+Please enter the number of days Bill has worked: Please enter the number of hours Bill has worked: Please enter the number of minutes Bill has worked: 
+The total time both of them worked together is: 6 days, 3 hours and 35 minutes.
