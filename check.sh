@@ -22,14 +22,16 @@ for Q in $QUESTIONS ; do
     echo "file missing: $EXPECTEDFILE" >&2
     exit 1
   fi
+  OUTFILE="$Q/build/actual.txt"
   if [ -f "$INFILE" ] ; then
-    OUTPUT=$("$EXEC" < "$INFILE")
+    "$EXEC" < "$INFILE" > "$OUTFILE"
   else
     echo "$Q: no input file" >&2
-    OUTPUT=$("$EXEC")
+    "$EXEC" > "$OUTFILE"
   fi
+  ACTUAL=$(cat "$OUTFILE")
   EXPECTED=$(cat "$EXPECTEDFILE")
-  if [ "$OUTPUT" != "$EXPECTED" ] ; then
+  if [ "$ACTUAL" != "$EXPECTED" ] ; then
     WRONGS="$Q $WRONGS"
     echo "$Q: expected" >&2
     echo
@@ -37,7 +39,7 @@ for Q in $QUESTIONS ; do
     echo
     echo "$Q: actual"
     echo
-    echo "$OUTPUT"
+    echo "$ACTUAL"
     echo
   else
     RIGHTS="$Q $RIGHTS"
