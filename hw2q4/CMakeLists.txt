@@ -3,4 +3,4 @@ project(hw2q4)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(hw2q4 main.cpp)
+add_executable(hw2q4 mac937_hw2_q4.cpp)
