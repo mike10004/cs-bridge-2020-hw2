@@ -23,7 +23,7 @@ int main() {
     std::cout.setf(std::ios::fixed);
     std::cout.precision(1);
     show_result(operand1, operand2, "+", operand1 + operand2);
-    show_result(operand1, operand2, "-", operand1 - operand2);
+    show_result(operand1, operand2, "–", operand1 - operand2);
     show_result(operand1, operand2, "*", operand1 * operand2);
     double div_result = double(operand1) / double(operand2);
     show_result(operand1, operand2, "/", div_result);
