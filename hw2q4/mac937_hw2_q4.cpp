@@ -1,27 +1,29 @@
 #include <iostream>
 
+using namespace std;
+
 void show_result(int operand1, int operand2, const char* op, int result)
 {
-    std::cout << operand1 << " "
+    cout << operand1 << " "
               << op << " "
               << operand2 << " = "
-              << result << std::endl;
+              << result << endl;
 }
 
 void show_result(int operand1, int operand2, const char* op, double result)
 {
-    std::cout << operand1 << " "
+    cout << operand1 << " "
               << op << " "
               << operand2 << " = "
-              << result << std::endl;
+              << result << endl;
 }
 
 int main() {
     int operand1, operand2;
-    std::cout << "Please enter two positive integers, separated by a space:\n";
-    std::cin >> operand1 >> operand2;
-    std::cout.setf(std::ios::fixed);
-    std::cout.precision(1);
+    cout << "Please enter two positive integers, separated by a space:\n";
+    cin >> operand1 >> operand2;
+    cout.setf(ios::fixed);
+    cout.precision(1);
     show_result(operand1, operand2, "+", operand1 + operand2);
     show_result(operand1, operand2, "–", operand1 - operand2);
     show_result(operand1, operand2, "*", operand1 * operand2);
