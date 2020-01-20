@@ -1,2 +1,6 @@
 Please enter number of coins:
-# of quarters: # of dimes: # of nickels: # of pennies: The total is 4 and 37 cents
+# of quarters: 13
+# of dimes: 4
+# of nickels: 11
+# of pennies: 17
+The total is 4 dollars and 37 cents
