@@ -25,6 +25,6 @@ int main()
             + (n_pennies * CENTS_PER_PENNY);
     int n_dollars = total_cents / 100;
     int cents_remaining = total_cents % 100;
-    cout << "The total is " << n_dollars << " and " << cents_remaining << " cents\n";
+    cout << "The total is " << n_dollars << " dollars and " << cents_remaining << " cents\n";
     return 0;
 }
