@@ -9,3 +9,4 @@ if [ -z "${BUILD_DIR_NAME}" ] ; then
 fi
 
 find . -type d -name "$BUILD_DIR_NAME" -print -exec rm -r {} \+
+find . -type f -name "screenlog.*" -delete

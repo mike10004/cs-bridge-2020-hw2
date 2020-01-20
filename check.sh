@@ -2,6 +2,24 @@
 
 set -e
 
+if [ "$DEBUG" == "1" ] ; then
+  DEBUGSINK="/dev/stderr"
+else
+  DEBUGSINK="/dev/null"
+fi
+
+debug()
+{
+  echo "debug: $1 $2 $3 $4 $5" >$DEBUGSINK
+}
+
+info()
+{
+  echo "info: $1 $2 $3 $4 $5" >/dev/stderr
+}
+
+PAUSE="${PAUSE:-0.1}"
+
 if [ -z "$1" ] ; then
   QUESTIONS=$(ls -d hw2q*)
   #echo "QUESTIONS=$QUESTIONS" >&2
@@ -16,6 +34,7 @@ RIGHTS=""
 
 for Q in $QUESTIONS ; do
   EXEC="$Q/build/$Q"
+  info "evaluating $EXEC"
   INFILE="$Q/input.txt"
   EXPECTEDFILE="$Q/expected-output.txt"
   if [ ! -f "$EXPECTEDFILE" ] ; then
@@ -24,25 +43,31 @@ for Q in $QUESTIONS ; do
   fi
   OUTFILE="$Q/build/actual.txt"
   if [ -f "$INFILE" ] ; then
-    "$EXEC" < "$INFILE" > "$OUTFILE"
+    rm -rf ./screenlog.*
+    SESSIONNAME=$(basename "$Q")
+    screen -L -S "$SESSIONNAME" -d -m "$EXEC"
+    debug "sleeping ${PAUSE} after opening screen session $SESSIONNAME"
+    sleep "$PAUSE"
+    while IFS= read -r line
+    do
+      screen -S "$SESSIONNAME" -X stuff "$line
+"
+      debug "sleeping ${PAUSE} after entering $line"
+      sleep "$PAUSE"
+    done < "$INFILE"
+    dos2unix -q -n screenlog.0 "$OUTFILE"
+    rm screenlog.0
   else
     echo "$Q: no input file" >&2
     "$EXEC" > "$OUTFILE"
   fi
-  ACTUAL=$(cat "$OUTFILE")
-  EXPECTED=$(cat "$EXPECTEDFILE")
-  if [ "$ACTUAL" != "$EXPECTED" ] ; then
-    WRONGS="$Q $WRONGS"
-    echo "$Q: expected" >&2
-    echo
-    echo "$EXPECTED"
-    echo
-    echo "$Q: actual"
-    echo
-    echo "$ACTUAL"
-    echo
-  else
+  #ACTUAL=$(cat "$OUTFILE")
+  #EXPECTED=$(cat "$EXPECTEDFILE")
+  
+  if diff "$EXPECTEDFILE" "$OUTFILE" ; then
     RIGHTS="$Q $RIGHTS"
+  else
+    WRONGS="$Q $WRONGS"
   fi
 done
 
